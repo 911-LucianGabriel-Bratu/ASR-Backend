@@ -14,7 +14,7 @@ def brn_model(input_dim, units, output_dim=29):
     # =============== 1st Layer =============== #
     # Add bidirectional recurrent layer
     bidirectional_rnn = Bidirectional(
-        GRU(units, activation='tanh', return_sequences=True, implementation=2, name='bidir_rnn'))(input_data)
+        GRU(units, activation='tanh', return_sequences=True, name='bidir_rnn'))(input_data)
     # Add batch normalization
     batch_normalization = BatchNormalization(name="batch_normalization_bidirectional_rnn")(bidirectional_rnn)
     # Add activation function
@@ -25,7 +25,7 @@ def brn_model(input_dim, units, output_dim=29):
     # =============== 2nd Layer =============== #
     # Add bidirectional recurrent layer
     bidirectional_rnn = Bidirectional(
-        GRU(units, activation='tanh', return_sequences=True, implementation=2, name='bidir_rnn'))(drop)
+        GRU(units, activation='tanh', return_sequences=True, name='bidir_rnn'))(drop)
     # Add batch normalization
     batch_normalization = BatchNormalization(name="bn_bidir_rnn_2")(bidirectional_rnn)
     # Add activation function
