@@ -31,10 +31,13 @@ def get_predictions_for_file_server_running(audio_file, input_to_softmax, model_
 
     data_point = DataGen.instance.normalize(DataGen.instance.featurize(audio_file))
     input_to_softmax.load_weights(model_path)
+    print("Loaded weights.")
     prediction = input_to_softmax.predict(np.expand_dims(data_point, axis=0))
+    print("got prediction")
     output_length = [input_to_softmax.output_length(data_point.shape[0])]
     pred_ints = (K.eval(K.ctc_decode(
         prediction, output_length)[0][0]) + 1).flatten().tolist()
+    print("obtained ints")
     return ''.join(int_sequence_to_text(pred_ints))
 
 
