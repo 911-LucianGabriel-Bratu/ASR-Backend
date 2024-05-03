@@ -29,7 +29,6 @@ def get_predictions_for_file_server_running(audio_file, input_to_softmax, model_
     if not DataGen.instance:
         raise Exception("DataGen instance is not initialized.")
 
-    K._get_available_gpus()
     data_point = DataGen.instance.normalize(DataGen.instance.featurize(audio_file))
     input_to_softmax.load_weights(model_path)
     prediction = input_to_softmax.predict(np.expand_dims(data_point, axis=0))
